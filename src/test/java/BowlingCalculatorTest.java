@@ -1,8 +1,6 @@
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BowlingCalculatorTest {
     BowlingCalculator calc = new BowlingCalculator();
@@ -27,5 +25,14 @@ class BowlingCalculatorTest {
         calc.roll(2);
         calc.roll(5);
         assertEquals(20, calc.score());
+    }
+    @Test
+    void multipleSpare() {
+        calc.roll(8);
+        calc.roll(2);
+        calc.roll(5);
+        calc.roll(5);
+        calc.roll(2);
+        assertEquals(29, calc.score());
     }
 }
