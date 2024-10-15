@@ -1,23 +1,30 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class BowlingCalculator {
-    public static void main(String[] args) {
+    List<Integer> rolls = new ArrayList<>();
 
-//        List <String> roll = new ArrayList<>(Arrays.asList("8","/","5","4","9","-","x","-","x","-","5","/","5","3","6","3","9","/","9","/","x"));
-        List <String> roll = new ArrayList<>(Arrays.asList("8"));
-        int score = bowlingScoreCalculator(roll);
-
-
-    }
-
-    public static int bowlingScoreCalculator(List<String> roll) {
+    public int score() {
         int score = 0;
 
-        for (int i = 0; i < roll.size(); i++){
-            score += Integer.valueOf(roll.get(i));
+        for (int i = 0; i < rolls.size(); i++) {
+
+            var currentRoll = rolls.get(i);
+            var lastRoll = 0;
+            if (i > 0) lastRoll = rolls.get(i - 1);
+            var beforeLastRoll = 0;
+            if (i > 1) beforeLastRoll = rolls.get(i - 2);
+
+            if (i % 2 == 0 && (lastRoll + beforeLastRoll == 10)) {
+                currentRoll *= 2;
+            }
+            score += currentRoll;
         }
+
         return score;
+    }
+
+    public void roll(int pins) {
+        rolls.add(pins);
     }
 }
