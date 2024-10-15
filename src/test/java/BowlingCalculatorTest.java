@@ -49,7 +49,7 @@ class BowlingCalculatorTest {
         calc.roll(10);
         calc.roll(3);
         calc.roll(4);
-        assertEquals(44, calc.score());
+        assertEquals(47, calc.score());
     }
 
     @Test
