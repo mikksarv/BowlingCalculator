@@ -35,4 +35,52 @@ class BowlingCalculatorTest {
         calc.roll(2);
         assertEquals(29, calc.score());
     }
+    @Test
+    void oneStrike() {
+        calc.roll(10);
+        calc.roll(4);
+        calc.roll(3);
+        assertEquals(24, calc.score());
+    }
+
+    @Test
+    void multipleStrike() {
+        calc.roll(10);
+        calc.roll(10);
+        calc.roll(3);
+        calc.roll(4);
+        assertEquals(44, calc.score());
+    }
+
+    @Test
+    void regularEnd() {
+        calc.roll(8);
+        calc.roll(2);
+
+        calc.roll(5);
+        calc.roll(4);
+
+        calc.roll(9);
+        calc.roll(0);
+
+        calc.roll(10);
+
+        calc.roll(10);
+
+        calc.roll(5);
+        calc.roll(5);
+
+        calc.roll(5);
+        calc.roll(3);
+
+        calc.roll(6);
+        calc.roll(3);
+
+        calc.roll(9);
+        calc.roll(1);
+
+        calc.roll(9);
+        calc.roll(0);
+        assertEquals(138 , calc.score());
+    }
 }
