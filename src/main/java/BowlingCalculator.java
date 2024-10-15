@@ -1,15 +1,23 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class BowlingCalculator {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+//        List <String> roll = new ArrayList<>(Arrays.asList("8","/","5","4","9","-","x","-","x","-","5","/","5","3","6","3","9","/","9","/","x"));
+        List <String> roll = new ArrayList<>(Arrays.asList("8"));
+        int score = bowlingScoreCalculator(roll);
+
+
+    }
+
+    public static int bowlingScoreCalculator(List<String> roll) {
+        int score = 0;
+
+        for (int i = 0; i < roll.size(); i++){
+            score += Integer.valueOf(roll.get(i));
         }
+        return score;
     }
 }
