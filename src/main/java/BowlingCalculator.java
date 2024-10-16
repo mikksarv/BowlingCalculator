@@ -3,6 +3,7 @@ import java.util.List;
 
 public class BowlingCalculator {
 
+    public static final int LAST_FRAME = 9;
     List<Frame> frames = new ArrayList<>();
     boolean isFirstRoll = true;
     int score = 0;
@@ -28,13 +29,14 @@ public class BowlingCalculator {
 
     public int score() {
 
-        for (int i = 0; i <= 9; i++) {
+        for (int i = 0; i <= LAST_FRAME; i++) {
 
             var frame = frames.get(i);
 
             score += frame.scoreOfFrame(frame.getFirstRoll(), frame.getSecondRoll());
 
             if (i == frames.size() - 1) {return score;}
+
             var nextFrame = frames.get(i + 1);
 
             if (frame.isSpare()) {
