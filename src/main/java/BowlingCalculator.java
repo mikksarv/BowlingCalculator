@@ -14,33 +14,50 @@ public class BowlingCalculator {
             isFirstRoll = false;
             frame.setFirstRoll(pin);
             frames.add(frame);
-            if (pin == 10) {
+
+            if (frame.isStrike()) {
                 isFirstRoll = true;
+                if (frameIndex == 11) {
+                    //frameIndex = 0;
+                    return;
+                }
                 frameIndex++;
             }
         } else {
             frames.get(frameIndex).setSecondRoll(pin);
-            frameIndex++;
             isFirstRoll = true;
+            if (frameIndex == 9 && !frames.get(frameIndex).isStrike() && !frames.get(frameIndex).isSpare()
+                    || frameIndex == 10 && frames.get(frameIndex - 1).isSpare()
+                    || frameIndex == 10 && frames.get(frameIndex - 1).isStrike()) {
+                frameIndex = 0;
+                return;
+            }
+            frameIndex++;
         }
     }
 
     public int score() {
 
         for (int i = 0; i < frames.size(); i++) {
-            score += frames.get(i).scoreOfFrame(frames.get(i).getFirstRoll(), frames.get(i).getSecondRoll());
-            if (frames.get(i).isSpare()) {
-                score += frames.get(i + 1).getFirstRoll();
+
+            var frame = frames.get(i);
+
+            score += frame.scoreOfFrame(frame.getFirstRoll(), frame.getSecondRoll());
+
+            if (i == frames.size() - 1) {  return score; }
+
+            var nextFrame = frames.get(i + 1);
+
+            if (frame.isSpare()) {
+                score += nextFrame.getFirstRoll();
             }
-            if (frames.get(i).isStrike()) {
-                score += frames.get(i + 1).scoreOfFrame(frames.get(i + 1).getFirstRoll(), frames.get(i + 1).getSecondRoll());
-                if (frames.get(i + 1).isStrike()) {
+            if (frame.isStrike()) {
+                score += nextFrame.scoreOfFrame(nextFrame.getFirstRoll(), nextFrame.getSecondRoll());
+                if (nextFrame.isStrike()) {
                     score += frames.get(i + 2).getFirstRoll();
                 }
             }
         }
-
         return score;
     }
-
 }
