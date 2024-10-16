@@ -27,10 +27,6 @@ public class BowlingCalculator {
 
     public int score() {
 
-//        frame katte saada, summa saaks katte ja lisaks skoorile
-//        Strike loogika ja spare loogika
-//        frameIndex jargi boonusringi loomine
-
         for (int i = 0; i < frames.size(); i++) {
             score += frames.get(i).scoreOfFrame(frames.get(i).getFirstRoll(), frames.get(i).getSecondRoll());
             if (frames.get(i).isSpare()) {
@@ -47,32 +43,4 @@ public class BowlingCalculator {
         return score;
     }
 
-
-//        if (frame.strike) {
-//            score += 10;
-//        } else if (frame.spare) {
-//        } else {
-//        }
-//        for (int i = 0; i < pframes[row].length; i++) {
-//            //
-//            for (int j = 0; j < frames[col].length; j++) {
-//                score += frames[i][j];
-//            }
-//            --col;
-//        }
-
-//        for (int i = 0; i < rolls.size(); i++) {
-//            var currentRoll = rolls.get(i);
-//            var lastRoll = 0;
-//            if (i > 0) lastRoll = rolls.get(i - 1);
-//            var beforeLastRoll = 0;
-//            if (i > 1) beforeLastRoll = rolls.get(i - 2);
-//            var beforeBeforeLastRoll = 0;
-//            if (i > 2) beforeBeforeLastRoll = rolls.get(i - 3);
-//
-//            if (i % 2 == 0 && (lastRoll + beforeLastRoll == 10) || beforeBeforeLastRoll == 10) {
-//                currentRoll *= 2;
-//            }
-//            score += currentRoll;
-//        }
 }
