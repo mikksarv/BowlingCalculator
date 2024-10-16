@@ -11,11 +11,11 @@ public class BowlingCalculator {
     int score = 0;
     int frameIndex = 0;
 
-    public void addRoll(int pin) {
+    public void addRoll(int pins) {
         if (isFirstRoll) {
             Frame frame = new Frame();
             isFirstRoll = false;
-            frame.setFirstRoll(pin);
+            frame.setFirstRoll(pins);
             frames.add(frame);
 
             if (frame.isStrike()) {
@@ -23,7 +23,7 @@ public class BowlingCalculator {
                 frameIndex++;
             }
         } else {
-            frames.get(frameIndex).setSecondRoll(pin);
+            frames.get(frameIndex).setSecondRoll(pins);
             isFirstRoll = true;
             frameIndex++;
         }

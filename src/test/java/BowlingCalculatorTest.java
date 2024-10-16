@@ -110,7 +110,7 @@ class BowlingCalculatorTest {
 
     @Test
     void fullGame() {
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i <= 11; i++) {
             calc.addRoll(10);
         }
         assertEquals(300, calc.score());
@@ -121,5 +121,4 @@ class BowlingCalculatorTest {
             calc.addRoll(example);
         }
     }
-
 }
