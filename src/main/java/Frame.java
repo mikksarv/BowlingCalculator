@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 public class Frame {
     int firstRoll;
@@ -24,24 +23,49 @@ public class Frame {
     }
 
     public boolean isStrike() {
-        return isStrike;
+        return firstRoll == 10 && secondRoll == 0;
     }
 
-    public void setStrike(boolean strike) {
-        isStrike = strike;
+    public Frame(int firstRoll, int secondRoll) {
+        this.firstRoll = firstRoll;
+        this.secondRoll = secondRoll;
     }
+
+    public Frame() {
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Frame frame = (Frame) o;
+        return firstRoll == frame.firstRoll && secondRoll == frame.secondRoll;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstRoll, secondRoll);
+    }
+
+    //    public void setStrike(boolean strike) {
+//        isStrike = strike;
+//    }
 
     public boolean isSpare() {
-        return isSpare;
+        return firstRoll + secondRoll == 10;
     }
 
-    public void setSpare(boolean spare) {
-        isSpare = spare;
-    }
+//    public void setSpare(boolean spare) {
+//        isSpare = spare;
+//    }
 
-    public int sumOfFrame(int firstRoll, int secondRoll) {
+    public int scoreOfFrame(int firstRoll, int secondRoll) {
         return firstRoll + secondRoll;
     }
+
+//    public boolean isFrameComplete() {
+//        return firstRoll == 10 || firstRoll != -1 && secondRoll != -1;
+//    }
 
     //List<Integer> rolls = new ArrayList<>();
 //    int[][] frames = new int[12][2];

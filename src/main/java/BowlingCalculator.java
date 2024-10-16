@@ -3,44 +3,26 @@ import java.util.List;
 
 public class BowlingCalculator {
 
-    Frame frame = new Frame();
     List<Frame> frames = new ArrayList<>();
+    boolean isFirstRoll = true;
     int score = 0;
+    int frameIndex = 0;
 
     public void setFrames(int pin) {
-        if (frame.getFirstRoll() == 0) {
+        if (isFirstRoll) {
+            Frame frame = new Frame();
+            isFirstRoll = false;
             frame.setFirstRoll(pin);
+            frames.add(frame);
         } else {
-            frame.setSecondRoll(pin);
+            frames.get(frameIndex).setSecondRoll(pin);
+            frameIndex++;
+            isFirstRoll = true;
         }
-
-        if (frame.sumOfFrame(frame.getFirstRoll(), frame.getSecondRoll()) == 10 && frame.getFirstRoll() != 10) {
-            frame.setSpare(true);
-        }
-        if (pin == 10) {
-            frame.setStrike(true);
-        }
-//        todo: frames array lisamisega probleem ilmselt
-        frames.add(frame);
     }
 
     public int score() {
 
-        for (int i = 0; i < frames.size(); i++) {
-
-            score += frame.getFirstRoll() + frame.getSecondRoll();
-
-            if (frame.isStrike() && i<frames.size() - 2) {
-                score += frames.get(i + 1).sumOfFrame(frame.getFirstRoll(), frame.getSecondRoll());
-
-                if (frames.get(i + 1).isStrike()) {
-                    score += frames.get(i + 2).sumOfFrame(frame.getFirstRoll(), frame.getSecondRoll());
-                }
-            }
-            if (frame.isSpare() && i<frames.size() - 1) {
-                score += frames.get(i + 1).getFirstRoll();
-            }
-        }
         return score;
     }
 
