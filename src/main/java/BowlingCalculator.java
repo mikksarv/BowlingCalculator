@@ -7,37 +7,35 @@ public class BowlingCalculator {
     List<Frame> frames = new ArrayList<>();
 
     // TODO: neid pole vaja
-    boolean isFirstRoll = true;
-    int score = 0;
-    int frameIndex = 0;
+//    boolean isFirstRoll = true;
+//    int score = 0;
+//    int frameIndex = 0;
 
     public void addRoll(int pins) {
-        if (isFirstRoll) {
+        if (frames.isEmpty() || frames.getLast().frameIsComplete()) {
             Frame frame = new Frame();
-            isFirstRoll = false;
             frame.setFirstRoll(pins);
             frames.add(frame);
-
-            if (frame.isStrike()) {
-                isFirstRoll = true;
-                frameIndex++;
-            }
         } else {
-            frames.get(frameIndex).setSecondRoll(pins);
-            isFirstRoll = true;
-            frameIndex++;
+            Frame currentFrame = frames.getLast();
+            if (!currentFrame.hasSecondRoll()) {
+                currentFrame.setSecondRoll(pins);
+            }
         }
     }
 
     public int score() {
-
-        for (int i = 0; i <= LAST_FRAME; i++) {
+        int score = 0;
+//        see vb pole vajalik
+        int numberOfFrames = frames.size();
+// kui panna juurde =, siis vist IndexOutOfBoundsError
+        for (int i = 0; i <= numberOfFrames; i++) {
 
             var frame = frames.get(i);
 
             score += frame.scoreOfFrame(frame.getFirstRoll(), frame.getSecondRoll());
 
-            if (i == frames.size() - 1) {return score;}
+            if (i == numberOfFrames - 1) {return score;}
 
             var nextFrame = frames.get(i + 1);
 
@@ -46,7 +44,7 @@ public class BowlingCalculator {
             }
             if (frame.isStrike()) {
                 score += nextFrame.scoreOfFrame(nextFrame.getFirstRoll(), nextFrame.getSecondRoll());
-                if (nextFrame.isStrike()) {
+                if (i + 2 < numberOfFrames && nextFrame.isStrike()) {
                     score += frames.get(i + 2).getFirstRoll();
                 }
             }

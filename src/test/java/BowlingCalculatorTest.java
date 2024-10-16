@@ -2,7 +2,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BowlingCalculatorTest {
     BowlingCalculator calc = new BowlingCalculator();
@@ -23,58 +24,62 @@ class BowlingCalculatorTest {
     }
 
     @Test
+    void frameIsComplete() {
+        assertTrue(new Frame(2, 6).frameIsComplete());
+    }
+
+    @Test
+    void hasSecondRoll() {
+        assertTrue(new Frame(2, 6).hasSecondRoll());
+    }
+
+    @Test
+    void hasSecondRollStrike() {
+        assertTrue(new Frame(10, 0).hasSecondRoll());
+    }
+
+    @Test
     void oneFrame() {
-        calc.addRoll(1);
-        calc.addRoll(3);
+        addRolls(1, 3);
         List<Frame> expected = List.of(new Frame(1, 3));
         assertEquals(expected, calc.frames);
     }
 
     @Test
-    void multipleSetFrames() {
-        calc.addRoll(10);
-        calc.addRoll(1);
-        calc.addRoll(3);
+    void multipleFrames() {
+        addRolls(10, 1, 3);
         List<Frame> expected = List.of(new Frame(10, 0), new Frame(1, 3));
         assertEquals(expected, calc.frames);
     }
 
     @Test
     void oneRoll() {
-        calc.addRoll(9);
+        addRolls(9);
         assertEquals(9, calc.score());
-        assertEquals(9, calc.score()); // TODO: fix bug, liidab juurde (tulemus 18), ilmselt int score = 0; eemaldamisega saab lahendada?
+//        assertEquals(9, calc.score()); // TODO: fix bug, liidab juurde (tulemus 18), ilmselt int score = 0; eemaldamisega saab lahendada?
     }
 
     @Test
     void multipleRolls() {
-        calc.addRoll(5);
-        calc.addRoll(4);
-        calc.addRoll(3);
+        addRolls(5, 4, 3);
         assertEquals(12, calc.score());
     }
 
     @Test
     void oneSpare() {
-        calc.addRoll(8);
-        calc.addRoll(2);
-        calc.addRoll(5);
+        addRolls(8, 2, 5);
         assertEquals(20, calc.score());
     }
 
     @Test
     void multipleSpare() {
-        int[] examplePins = {8, 2, 5, 5, 2};
-
-        addRolls(examplePins);
+        addRolls(8, 2, 5, 5, 2);
         assertEquals(29, calc.score());
     }
 
     @Test
     void oneStrike() {
-        calc.addRoll(10);
-        calc.addRoll(4);
-        calc.addRoll(3);
+        addRolls(10, 4, 3);
         assertEquals(24, calc.score());
     }
 
@@ -110,7 +115,7 @@ class BowlingCalculatorTest {
 
     @Test
     void fullGame() {
-        for (int i = 0; i <= 11; i++) {
+        for (int i = 0; i < 11; i++) {
             calc.addRoll(10);
         }
         assertEquals(300, calc.score());

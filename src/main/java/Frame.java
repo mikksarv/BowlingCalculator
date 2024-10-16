@@ -30,6 +30,10 @@ public class Frame {
         this.secondRoll = secondRoll;
     }
 
+    public boolean hasSecondRoll() {
+        return secondRoll > 0 || isStrike();
+    }
+
     public int scoreOfFrame(int firstRoll, int secondRoll) {
         return firstRoll + secondRoll;
     }
@@ -40,6 +44,10 @@ public class Frame {
 
     public boolean isStrike() {
         return firstRoll == 10;
+    }
+
+    public boolean frameIsComplete() {
+        return isStrike() || isSpare() || (firstRoll > 0 && secondRoll > 0);
     }
 
     @Override
@@ -54,5 +62,8 @@ public class Frame {
     public int hashCode() {
         return Objects.hash(firstRoll, secondRoll);
     }
+
+
+
 
 }
