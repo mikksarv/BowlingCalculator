@@ -43,7 +43,7 @@ class BowlingCalculatorTest {
     void oneRoll() {
         calc.addRoll(9);
         assertEquals(9, calc.score());
-        assertEquals(9, calc.score()); // TODO: fix bug
+        assertEquals(9, calc.score()); // TODO: fix bug, liidab juurde (tulemus 18), ilmselt int score = 0; eemaldamisega saab lahendada?
     }
 
     @Test
