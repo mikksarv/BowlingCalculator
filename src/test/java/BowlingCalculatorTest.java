@@ -99,7 +99,75 @@ class BowlingCalculatorTest {
     }
 
     @Test
-    void strikeEnd() {
+    void spareEnd() {
+        calc.setFrames(8);
+        calc.setFrames(2);
+
+        calc.setFrames(5);
+        calc.setFrames(4);
+
+        calc.setFrames(9);
+        calc.setFrames(0);
+
+        calc.setFrames(10);
+
+        calc.setFrames(10);
+
+        calc.setFrames(5);
+        calc.setFrames(5);
+
+        calc.setFrames(5);
+        calc.setFrames(3);
+
+        calc.setFrames(6);
+        calc.setFrames(3);
+
+        calc.setFrames(8);
+        calc.setFrames(1);
+
+        calc.setFrames(8);
+        calc.setFrames(2);
+
+        calc.setFrames(2);
+        assertEquals(131 , calc.score());
+    }
+
+    @Test
+    void oneStrikeEnd() {
+        calc.setFrames(8);
+        calc.setFrames(2);
+
+        calc.setFrames(5);
+        calc.setFrames(4);
+
+        calc.setFrames(9);
+        calc.setFrames(0);
+
+        calc.setFrames(10);
+
+        calc.setFrames(10);
+
+        calc.setFrames(5);
+        calc.setFrames(5);
+
+        calc.setFrames(5);
+        calc.setFrames(3);
+
+        calc.setFrames(6);
+        calc.setFrames(3);
+
+        calc.setFrames(8);
+        calc.setFrames(1);
+
+        calc.setFrames(10);
+
+        calc.setFrames(2);
+        calc.setFrames(3);
+        assertEquals(134 , calc.score());
+    }
+
+    @Test
+    void doubleStrikeEnd() {
         calc.setFrames(8);
         calc.setFrames(2);
 

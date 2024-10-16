@@ -17,35 +17,24 @@ public class BowlingCalculator {
 
             if (frame.isStrike()) {
                 isFirstRoll = true;
-                if (frameIndex == 11) {
-                    //frameIndex = 0;
-                    return;
-                }
                 frameIndex++;
             }
         } else {
             frames.get(frameIndex).setSecondRoll(pin);
             isFirstRoll = true;
-            if (frameIndex == 9 && !frames.get(frameIndex).isStrike() && !frames.get(frameIndex).isSpare()
-                    || frameIndex == 10 && frames.get(frameIndex - 1).isSpare()
-                    || frameIndex == 10 && frames.get(frameIndex - 1).isStrike()) {
-                frameIndex = 0;
-                return;
-            }
             frameIndex++;
         }
     }
 
     public int score() {
 
-        for (int i = 0; i < frames.size(); i++) {
+        for (int i = 0; i <= 9; i++) {
 
             var frame = frames.get(i);
 
             score += frame.scoreOfFrame(frame.getFirstRoll(), frame.getSecondRoll());
 
-            if (i == frames.size() - 1) {  return score; }
-
+            if (i == frames.size() - 1) {return score;}
             var nextFrame = frames.get(i + 1);
 
             if (frame.isSpare()) {
