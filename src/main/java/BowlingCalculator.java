@@ -14,6 +14,10 @@ public class BowlingCalculator {
             isFirstRoll = false;
             frame.setFirstRoll(pin);
             frames.add(frame);
+            if (pin == 10) {
+                isFirstRoll = true;
+                frameIndex++;
+            }
         } else {
             frames.get(frameIndex).setSecondRoll(pin);
             frameIndex++;
@@ -22,6 +26,23 @@ public class BowlingCalculator {
     }
 
     public int score() {
+
+//        frame katte saada, summa saaks katte ja lisaks skoorile
+//        Strike loogika ja spare loogika
+//        frameIndex jargi boonusringi loomine
+
+        for (int i = 0; i < frames.size(); i++) {
+            score += frames.get(i).scoreOfFrame(frames.get(i).getFirstRoll(), frames.get(i).getSecondRoll());
+            if (frames.get(i).isSpare()) {
+                score += frames.get(i + 1).getFirstRoll();
+            }
+            if (frames.get(i).isStrike()) {
+                score += frames.get(i + 1).scoreOfFrame(frames.get(i + 1).getFirstRoll(), frames.get(i + 1).getSecondRoll());
+                if (frames.get(i + 1).isStrike()) {
+                    score += frames.get(i + 2).getFirstRoll();
+                }
+            }
+        }
 
         return score;
     }

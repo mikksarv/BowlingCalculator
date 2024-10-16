@@ -3,8 +3,6 @@ import java.util.Objects;
 public class Frame {
     int firstRoll;
     int secondRoll;
-    boolean isStrike;
-    boolean isSpare;
 
     public int getFirstRoll() {
         return firstRoll;
@@ -22,9 +20,6 @@ public class Frame {
         this.secondRoll = secondRoll;
     }
 
-    public boolean isStrike() {
-        return firstRoll == 10 && secondRoll == 0;
-    }
 
     public Frame(int firstRoll, int secondRoll) {
         this.firstRoll = firstRoll;
@@ -47,17 +42,13 @@ public class Frame {
         return Objects.hash(firstRoll, secondRoll);
     }
 
-    //    public void setStrike(boolean strike) {
-//        isStrike = strike;
-//    }
-
     public boolean isSpare() {
-        return firstRoll + secondRoll == 10;
+        return firstRoll + secondRoll == 10 && firstRoll != 10;
     }
 
-//    public void setSpare(boolean spare) {
-//        isSpare = spare;
-//    }
+    public boolean isStrike() {
+        return firstRoll == 10;
+    }
 
     public int scoreOfFrame(int firstRoll, int secondRoll) {
         return firstRoll + secondRoll;
