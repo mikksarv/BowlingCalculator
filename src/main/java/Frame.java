@@ -4,9 +4,11 @@ public class Frame {
     int firstRoll;
     int secondRoll;
 
+    // TODO: teil pole vaja tühja Frame-i
     public Frame() {
     }
 
+//    TODO: selline meetod, et sisse tuleb ainult firstRoll, sest teine tuleb jargi
     public Frame(int firstRoll, int secondRoll) {
         this.firstRoll = firstRoll;
         this.secondRoll = secondRoll;

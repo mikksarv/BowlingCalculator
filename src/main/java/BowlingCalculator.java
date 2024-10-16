@@ -5,11 +5,13 @@ public class BowlingCalculator {
 
     public static final int LAST_FRAME = 9;
     List<Frame> frames = new ArrayList<>();
+
+    // TODO: neid pole vaja
     boolean isFirstRoll = true;
     int score = 0;
     int frameIndex = 0;
 
-    public void setFrames(int pin) {
+    public void addRoll(int pin) {
         if (isFirstRoll) {
             Frame frame = new Frame();
             isFirstRoll = false;
